@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ali Saadi | Personal Website</title>
+
+    <!-- Simple, clean styling -->
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-alt: #020617;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.15);
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --card-bg: #020617;
+            --border-subtle: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            background: radial-gradient(circle at top, #1f2937 0, #020617 50%, #000 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 3rem;
+        }
+
+        header {
+            padding: 1.25rem 1.5rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-subtle);
+            background: linear-gradient(135deg,
+                    rgba(15, 23, 42, 0.95),
+                    rgba(15, 23, 42, 0.7));
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 1rem;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            background: radial-gradient(circle at 30% 0, #38bdf8, #0f172a);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+        }
+
+        .brand-text strong {
+            font-size: 0.95rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            position: relative;
+            padding-bottom: 0.15rem;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--accent);
+            transition: width 0.2s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .hero {
+            border-radius: 1.75rem;
+            border: 1px solid var(--border-subtle);
+            padding: 2.25rem 2rem;
+            background: radial-gradient(circle at 10% 0, #22d3ee20, #020617 60%);
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-kicker {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            margin-bottom: 0.7rem;
+        }
+
+        .hero h1 {
+            font-size: 2.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .pill {
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        .pill.highlight {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            border-radius: 999px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+            color: #0b1120;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn-ghost {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--border-subtle);
+            color: var(--text-main);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+        }
+
+        .hero-right {
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-subtle);
+            padding: 1.25rem 1.4rem;
+            background: rgba(15, 23, 42, 0.9);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.2rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .stat-col {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        section {
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-subtle);
+            padding: 1.75rem 1.5rem;
+            background: rgba(15, 23, 42, 0.92);
+        }
+
+        section+section {
+            margin-top: 0.5rem;
+        }
+
+        section h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        section p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .card {
+            border-radius: 1rem;
+            border: 1px solid var(--border-subtle);
+            padding: 1rem 1.1rem;
+            background: radial-gradient(circle at 0 0, #22d3ee07, #020617 60%);
+            font-size: 0.9rem;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.4rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            color: var(--text-muted);
+        }
+
+        .timeline {
+            margin-top: 0.6rem;
+            border-left: 1px solid rgba(55, 65, 81, 0.9);
+            padding-left: 0.9rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 0.9rem;
+        }
+
+        .timeline-item strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .timeline-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.15rem;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-top: 0.75rem;
+            display: grid;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        footer a {
+            font-size: 0.78rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .hero {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero {
+                padding: 1.75rem 1.4rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- Top navigation / brand -->
+        <header>
+            <div class="brand">
+                <div class="avatar">AS</div>
+                <div class="brand-text">
+                    <strong>Ali Saadi</strong>
+                    <span>IT Ops → Platform Engineering</span>
+                </div>
+            </div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Hero section -->
+            <section class="hero">
+                <div>
+                    <div class="hero-kicker">Platform engineer in progress</div>
+                    <h1>
+                        Building reliable platforms, one
+                        <span>iteration</span> at a time.
+                    </h1>
+                    <p class="hero-subtitle">
+                        I’m an IT Operations Analyst and CIS student transitioning into
+                        platform engineering. I enjoy working with Git, Linux, automation,
+                        and cloud-native tooling to make life easier for developers and
+                        operations teams.
+                    </p>
+
+                    <div class="pill-row">
+                        <div class="pill highlight">Git & GitHub</div>
+                        <div class="pill">Linux fundamentals</div>
+                        <div class="pill">Python learner</div>
+                        <div class="pill">Scrum & Agile</div>
+                        <div class="pill">CI/CD & DevOps mindset</div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#projects">
+                            View projects
+                            <span>↗</span>
+                        </a>
+                        <a class="btn btn-ghost" href="#contact">
+                            Get in touch
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="hero-right">
+                    <div>
+                        <div class="label">Quick snapshot</div>
+                        <p>
+                            Based in Arizona, working in IT operations while training in a
+                            platform engineering bootcamp and studying Computer Information
+                            Systems at ASU.
+                        </p>
+                    </div>
+
+                    <div class="stat-row">
+                        <div class="stat-col">
+                            <div class="label">Focus areas</div>
+                            <div class="stat-number">DevOps, Git, CI/CD</div>
+                            <p>
+                                Learning how modern teams ship software safely and reliably.
+                            </p>
+                        </div>
+                        <div class="stat-col">
+                            <div class="label">Next step</div>
+                            <div class="stat-number">Platform Eng</div>
+                            <p>
+                                Building a strong foundation in automation, scripting, and
+                                cloud.
+                            </p>
+                        </div>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- About section -->
+            <section id="about">
+                <h2>About</h2>
+                <p>
+                    I’m Ali, an IT Operations Analyst with hands-on experience supporting
+                    users, troubleshooting systems, and working with tools like ticketing
+                    systems, MFA, and device management. I’m currently levelling up into
+                    platform engineering through a structured bootcamp and my CIS degree.
+                </p>
+                <p style="margin-top: 0.7rem">
+                    My goal is to bridge operations and development by building reliable,
+                    automated, and observable platforms where teams can ship value
+                    quickly—without sacrificing stability or security.
+                </p>
+
+                <div class="grid grid-2" style="margin-top: 1.1rem">
+                    <div class="card">
+                        <h3>What I’m learning</h3>
+                        <p>
+                            Right now I’m focused on deepening my knowledge of Git, Linux,
+                            Python, networking fundamentals, and CI/CD concepts, with an eye
+                            toward infrastructure as code and cloud platforms later.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Git & branching</span>
+                            <span class="tag">Linux CLI</span>
+                            <span class="tag">Python basics</span>
+                            <span class="tag">Scrum</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>How I like to work</h3>
+                        <p>
+                            I enjoy breaking problems down, experimenting in small steps, and
+                            documenting what I learn so others can follow. I’m a big believer
+                            in continuous improvement—for systems, teams, and myself.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Curious</span>
+                            <span class="tag">Collaborative</span>
+                            <span class="tag">Growth mindset</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience section -->
+            <section id="experience">
+                <h2>Experience</h2>
+                <p>
+                    A quick overview of where I’m coming from and how it connects to
+                    platform engineering.
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>IT Operations / Help Desk</strong>
+                        <span>Enterprise environment · Tiered support</span>
+                        <p>
+                            Troubleshooting user issues, managing accounts and devices, and
+                            working with enterprise tools has given me a solid foundation in
+                            how real systems behave in production and what reliability means
+                            to end users.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Platform Engineering Bootcamp</strong>
+                        <span>Git, Linux, DevOps fundamentals</span>
+                        <p>
+                            Training in Git, branching strategies, Scrum, and core DevOps
+                            concepts—preparing to work with CI/CD, automation, and cloud
+                            infrastructure.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Computer Information Systems (CIS)</strong>
+                        <span>Arizona State University</span>
+                        <p>
+                            Studying the intersection of business and technology: systems
+                            analysis, databases, programming, and how IT supports
+                            organizational goals.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects section -->
+            <section id="projects">
+                <h2>Projects</h2>
+                <p>Some small but meaningful steps on my learning journey.</p>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>GitHub Pages Personal Site</h3>
+                        <p>
+                            A simple, fast personal website hosted on GitHub Pages, built with
+                            HTML and CSS. This is where I share who I am, what I’m learning,
+                            and what I’m building next.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">GitHub Pages</span>
+                            <span class="tag">HTML &amp; CSS</span>
+                            <span class="tag">Version control</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Learning Labs & Experiments</h3>
+                        <p>
+                            A collection of small labs and exercises focused on Git, basic
+                            scripting, and understanding how CI/CD and DevOps workflows fit
+                            together in practice.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Git</span>
+                            <span class="tag">Automation mindset</span>
+                            <span class="tag">CI/CD concepts</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact section -->
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>
+                    Open to connecting with engineers, mentors, and teams working in
+                    platform engineering, DevOps, or cloud infrastructure.
+                </p>
+
+                <ul class="contact-list">
+                    <li>
+                        <strong>Email:</strong>
+                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                    </li>
+                    <li>
+                        <strong>GitHub:</strong>
+                        <a href="https://github.com/your-github-username" target="_blank">
+                            github.com/your-github-username
+                        </a>
+                    </li>
+                    <li>
+                        <strong>LinkedIn:</strong>
+                        <a href="https://www.linkedin.com/in/your-linkedin-handle" target="_blank">
+                            linkedin.com/in/your-linkedin-handle
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            © <span id="year"></span> Ali Saadi · Built with HTML &amp; CSS · Hosted on
+            <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+        </footer>
+    </div>
+
+    <script>
+        // Simple script to keep the year up to date
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
